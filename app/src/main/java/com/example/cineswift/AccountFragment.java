@@ -2,11 +2,14 @@ package com.example.cineswift;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ncorti.slidetoact.SlideToActView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +61,23 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account,container,false);
+
+        SlideToActView slideToActView = view.findViewById(R.id.slide_act);
+
+        slideToActView.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
+            @Override
+            public void onSlideComplete(@NonNull SlideToActView slideToActView) {
+                exitApp();
+            }
+        });
+
+        return view;
+    }
+
+    private void exitApp() {
+        if (getActivity() != null) {
+            getActivity().finishAffinity();
+        }
     }
 }

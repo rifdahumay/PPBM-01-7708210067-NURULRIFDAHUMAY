@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,8 +23,6 @@ public class BioskopFragment extends Fragment {
     ListView lv;
     SearchView searchView;
     ArrayAdapter<String> adapter;
-    String [] data = {"CGV BEC", "CGV 23 Paskal", "CGV The Kings Shopping Centre", "XXI Theematic Mall", "XXI Cihampelas Walk", "XXI BTC", "XXI Ubertos", "XXI Braga", "XXI Trans Studio Mall Bandung", "XXI Transmart buah batu", "Empire XXI Bandung Indah Plaza", "CGV Paris van Java", "CGV Metro Indah Mall", "Cineapolis Istana Plaza", "CGV Miko Mall","XXI Festival Citylink"};
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,19 +68,24 @@ public class BioskopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bioskop2, container, false);
-        lv = (ListView) view.findViewById(R.id.id_listView);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+
+        String[] listBioskop = {"CGV BEC", "CGV 23 Paskal", "CGV The Kings Shopping Centre", "XXI Theematic Mall", "XXI Cihampelas Walk", "XXI BTC", "XXI Ubertos", "XXI Braga", "XXI Trans Studio Mall Bandung", "XXI Transmart buah batu", "Empire XXI Bandung Indah Plaza", "CGV Paris van Java", "CGV Metro Indah Mall", "Cineapolis Istana Plaza", "CGV Miko Mall", "XXI Festival Citylink"};
+
+        lv = view.findViewById(R.id.id_listView);
+
+        // Initialize the ArrayAdapter with the data
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, listBioskop);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0){
-                    Intent intent = new Intent(view.getContext(), Activity_Bioskop1.class);
-                    startActivity(intent);
-                }
+                // Handle item click if needed
+                Toast.makeText(requireContext(), "You Clicked " + listBioskop[position], Toast.LENGTH_SHORT).show();
             }
         });
+
         return view;
     }
+
 }
